@@ -59,13 +59,14 @@ public class PlayerClimbing : MonoBehaviour
     }
 
     void ChangeLane(int direction) {
-        int targetLane = currentLane + direction;
+        int targetLane = (currentLane + direction);
         if(targetLane < 0 || targetLane > 2)
             return;
         
         currentLane = targetLane;
         int newCurrentLane = (currentLane -1);
-        verticalTargetPosition = new Vector3(newCurrentLane, 0, 0);
+        int definePositionZ = (newCurrentLane == 1 || newCurrentLane == -1) ? 1 : 0;
+        verticalTargetPosition = new Vector3(newCurrentLane, 0, definePositionZ);
     }
 
     private void FixedUpdate() {
