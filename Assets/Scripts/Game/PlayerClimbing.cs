@@ -70,6 +70,6 @@ public class PlayerClimbing : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        rb.velocity = Vector3.up * speed;
+        //rb.velocity = Vector3.up * speed;
     }
 }
