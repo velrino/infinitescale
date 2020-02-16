@@ -31,28 +31,30 @@ public class PlayerClimbing : MonoBehaviour
         float newSpeedLane = (speedLane * Time.deltaTime);
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, newSpeedLane);
     
+
+        if(Input.touchCount > 0) {
             Touch isTouch = Input.GetTouch(0);
 
-        if(Input.touchCount == 1) {
             if(isSwipping) {
                 Vector2 diff = (isTouch.position - startingTouch);
                 if(diff.magnitude > 0.01f){
-                    if(diff.x < 0) { 
+                    bool nextDiff = (diff.x < 0);
+                    if(nextDiff) { 
                         ChangeLane(-1);
-                    } 
+                    }
                     else { 
                         ChangeLane(1);
                     } 
                 }
             }
-        }
 
-        if(isTouch.phase == TouchPhase.Began){
-            startingTouch = isTouch.position;
-            isSwipping = true;
-        }
-        else if(isTouch.phase == TouchPhase.Ended){
-            isSwipping = false;
+            if(isTouch.phase == TouchPhase.Began){
+                startingTouch = isTouch.position;
+                isSwipping = true;
+            }
+            else if(isTouch.phase == TouchPhase.Moved){
+                isSwipping = false;
+            }
         }
     }
 
