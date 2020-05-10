@@ -10,7 +10,10 @@ public class Track : MonoBehaviour {
 	public List<GameObject> newObstacles;
 
     private Vector3 initialPosition;
-    public float MoveSpeed = -3;
+    public float moveSpeed = -5;
+	public float reSpawnPositionY = 0;
+    public float minPositionY = -9;
+    public float maxPositionY = -10;
     private Rigidbody rb;
 
 	// Use this for initialization
@@ -42,9 +45,10 @@ public class Track : MonoBehaviour {
 
     void Update()
     {   
-        rb.velocity = new Vector3(0, (MoveSpeed*2) , 0);
-        if(transform.position.y > -100 && transform.position.y < -99) {
-            transform.position = new Vector3(transform.position.x, 90 , transform.position.z);
+        rb.velocity = new Vector3(0, (moveSpeed*2) , 0);
+		print(transform.position.y);
+        if(transform.position.y > maxPositionY && transform.position.y < minPositionY) {
+            transform.position = new Vector3(transform.position.x, reSpawnPositionY, transform.position.z);
         }
          //transform.Translate((Vector3.down / MoveSpeed) * Time.deltaTime);
     }
